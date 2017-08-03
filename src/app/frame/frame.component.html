@@ -1,0 +1,32 @@
+
+<div *ngFor="let frame of frames$ | async; index as i">
+
+  <div class="wrapper"
+    *ngIf="i === frameIndex"
+    [style.color] = "frame.style.color"
+    [style.background-color] = "frame.style.bgColor">
+
+  <!-- Title section  -->
+  <h1 *ngIf="frame.title">
+    {{frame.title}}
+  </h1>
+
+  <!-- Content section  -->
+  <p *ngIf="frame.content">
+    {{frame.content}}
+  </p>
+
+  <!-- Code section  -->
+  <pre *ngIf="frame.code">
+    <code 
+      id="code-container-{{ i }}" 
+      class="language-{{ frame.code.language }}">
+      {{ frame.code.source }}
+    </code>
+  </pre> 
+  </div>
+<!-- <slide-code *ngIf="frame.code" [code]="frame.code"></slide-code> -->
+</div>
+
+<ng-template #loading>Loading Frame...</ng-template> 
+<slide-menu class="menu"></slide-menu>

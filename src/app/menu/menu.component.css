@@ -1,0 +1,12 @@
+:host {
+    display: inline;
+}
+
+button {
+    background-color: none;
+    color: white;
+}
+
+button .fab {
+    background-color: black;
+}

@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+:host {
+	position: relative;
+	font-family: Roboto;
+}
+
+.wrapper {
+	display: flex; 
+	flex-direction: column; 
+	min-height: 100vh;
+	min-width: 90vw;
+	justify-content: center;
+	padding-left: 5vw;
+	padding-right: 5vw;
+}
+
+.menu {
+	position: fixed; 
+	bottom:30px;
+	right:30px;
+}
+
+ h1 {
+	font-size: 6em; 
+}
+
+p { 
+	font-size: 2em;
+} 
