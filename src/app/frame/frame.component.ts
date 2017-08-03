@@ -3,12 +3,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 
 import { NgRedux } from '@angular-redux/store';
-import { CounterActions } from '../actions'; 
-import { IAppState } from "../store"; 
+import { CounterActions } from '../actions';
+import { IAppState } from '../store';
 
 import Prism from 'prismjs';
 
-import { Frame } from "../frame";
+import { Frame } from '../frame';
 
 @Component({
   selector: 'slide-frame',
@@ -16,7 +16,7 @@ import { Frame } from "../frame";
   styleUrls: ['./frame.component.css']
 })
 export class FrameComponent implements AfterViewChecked {
-  
+
   @Input() frameIdx: number;
 
   frameIndex: number;
@@ -24,12 +24,12 @@ export class FrameComponent implements AfterViewChecked {
   frames$: Observable<Frame[]>;
 
   constructor(
-    private ngRedux: NgRedux<IAppState>, 
+    private ngRedux: NgRedux<IAppState>,
     private actions: CounterActions) {
     this.frameIndexSub = ngRedux.select<number>('frameIndex').subscribe(fI => this.frameIndex = fI);
     this.frames$ = ngRedux.select<Frame[]>('frames');
   }
-  
+
   ngAfterViewChecked() {
     Prism.highlightAll();
   }

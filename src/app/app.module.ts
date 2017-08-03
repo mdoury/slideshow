@@ -10,8 +10,8 @@ import { CodeComponent } from './code/code.component';
 import { MenuComponent } from './menu/menu.component';
 
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
-import { rootReducer, IAppState, INITIAL_STATE } from './store'; 
-import { CounterActions } from './actions'; 
+import { rootReducer, IAppState, INITIAL_STATE } from './store';
+import { CounterActions } from './actions';
 
 
 import { MdButtonModule, MdIconModule } from '@angular/material';
@@ -35,7 +35,7 @@ import { MdButtonModule, MdIconModule } from '@angular/material';
   providers: [CounterActions],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>) {
     // Tell @angular-redux/store about our rootReducer and our initial state.
     // It will use this to create a redux store for us and wire up all the

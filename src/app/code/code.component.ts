@@ -1,12 +1,12 @@
 import { Component, AfterViewInit, Input} from '@angular/core';
 
 import { NgRedux } from '@angular-redux/store';
-import { CounterActions } from '../actions'; 
-import { IAppState } from "../store"; 
+import { CounterActions } from '../actions';
+import { IAppState } from '../store';
 
 import Prism from 'prismjs';
 
-import { Code } from "../code";
+import { Code } from '../code';
 
 @Component({
   selector: 'slide-code',
@@ -20,7 +20,7 @@ export class CodeComponent implements AfterViewInit {
   subFrameIndex;
 
   constructor(
-    private ngRedux: NgRedux<IAppState>, 
+    private ngRedux: NgRedux<IAppState>,
     private actions: CounterActions) {
     this.subFrameIndex = ngRedux.select<number>('frameIndex')
         .subscribe(idx => this.frameIndex = idx);
@@ -28,7 +28,7 @@ export class CodeComponent implements AfterViewInit {
 
   ngAfterViewInit () {
     const codeNode = document.getElementsByTagName('code')[0];
-    console.log(codeNode)
+    console.log(codeNode);
     Prism.highlightElement(codeNode);
   }
 }
