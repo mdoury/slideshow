@@ -54,7 +54,7 @@ export class AppComponent {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    switch(event.keyCode) {
+    switch (event.keyCode) {
       case KEY_CODE.RIGHT_ARROW:
           this.nextFrame();
           break;

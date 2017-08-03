@@ -82,23 +82,23 @@ export function rootReducer(lastState: IAppState, action: Action): IAppState {
           optionMenuIsOpen: !lastState.optionMenuIsOpen
       });
     case AppActions.TOGGLE_FULLSCREEN:
-      let el = document.getElementById('slideFrame');
+      const el = document.getElementById('slideFrame');
       if (lastState.isFullscreen) {
-        if(document.exitFullscreen) {
+        if (document.exitFullscreen) {
           document.exitFullscreen();
-        } else if(document['mozCancelFullScreen']) {
+        } else if (document['mozCancelFullScreen']) {
           document['mozCancelFullScreen']();
-        } else if(document.webkitExitFullscreen) {
+        } else if (document.webkitExitFullscreen) {
           document.webkitExitFullscreen();
         }
       } else {
-        if(el.requestFullscreen) {
+        if (el.requestFullscreen) {
           el.requestFullscreen();
-        } else if(el['mozRequestFullScreen']) {
+        } else if (el['mozRequestFullScreen']) {
           el['mozRequestFullScreen']();
-        } else if(el.webkitRequestFullscreen) {
+        } else if (el.webkitRequestFullscreen) {
           el.webkitRequestFullscreen();
-        } else if(el['msRequestFullscreen']) {
+        } else if (el['msRequestFullscreen']) {
           el['msRequestFullscreen']();
         }
       }

@@ -17,7 +17,7 @@ export class MenuComponent implements OnDestroy {
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private actions: AppActions) {
-      this.optionMenuIsOpenSub = ngRedux.select<boolean>('optionMenuIsOpen').subscribe(omio => this.optionMenuIsOpen = omio);
+      this.optionMenuIsOpenSub = ngRedux.select<boolean>('optionMenuIsOpen').subscribe(isOpen => this.optionMenuIsOpen = isOpen);
     }
 
   prevFrame() {
@@ -40,5 +40,5 @@ export class MenuComponent implements OnDestroy {
   ngOnDestroy () {
     this.optionMenuIsOpenSub.unsubscribe();
   }
- 
+
 }
