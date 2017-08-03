@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, Input} from '@angular/core';
 
 import { NgRedux } from '@angular-redux/store';
-import { CounterActions } from '../actions';
+import { AppActions } from '../actions';
 import { IAppState } from '../store';
 
 import Prism from 'prismjs';
@@ -21,7 +21,7 @@ export class CodeComponent implements AfterViewInit {
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
-    private actions: CounterActions) {
+    private actions: AppActions) {
     this.subFrameIndex = ngRedux.select<number>('frameIndex')
         .subscribe(idx => this.frameIndex = idx);
   }

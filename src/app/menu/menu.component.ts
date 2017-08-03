@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { NgRedux } from '@angular-redux/store';
-import { CounterActions } from '../actions';
+import { Observable } from 'rxjs/Observable';
+import { AppActions } from '../actions';
 import { IAppState } from '../store';
 
 @Component({
@@ -9,11 +10,15 @@ import { IAppState } from '../store';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
+export class MenuComponent implements OnDestroy {
+  optionMenuIsOpen: boolean;
+  optionMenuIsOpenSub;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
-    private actions: CounterActions) { }
+    private actions: AppActions) {
+      this.optionMenuIsOpenSub = ngRedux.select<boolean>('optionMenuIsOpen').subscribe(omio => this.optionMenuIsOpen = omio);
+    }
 
   prevFrame() {
     this.ngRedux.dispatch(this.actions.decrement());
@@ -23,4 +28,17 @@ export class MenuComponent {
     this.ngRedux.dispatch(this.actions.increment());
   }
 
+  toggleMenu() {
+    this.ngRedux.dispatch(this.actions.toggleMenu());
+    console.log(this.optionMenuIsOpen);
+  }
+
+  toggleFullscreen() {
+    this.ngRedux.dispatch(this.actions.toggleFullscreen());
+  }
+
+  ngOnDestroy () {
+    this.optionMenuIsOpenSub.unsubscribe();
+  }
+ 
 }

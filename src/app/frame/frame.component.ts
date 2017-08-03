@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 
 import { NgRedux } from '@angular-redux/store';
-import { CounterActions } from '../actions';
+import { AppActions } from '../actions';
 import { IAppState } from '../store';
 
 import Prism from 'prismjs';
@@ -22,10 +22,11 @@ export class FrameComponent implements AfterViewChecked {
   frameIndex: number;
   frameIndexSub;
   frames$: Observable<Frame[]>;
+  optionMenuIsOpen$: Observable<boolean>;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
-    private actions: CounterActions) {
+    private actions: AppActions) {
     this.frameIndexSub = ngRedux.select<number>('frameIndex').subscribe(fI => this.frameIndex = fI);
     this.frames$ = ngRedux.select<Frame[]>('frames');
   }

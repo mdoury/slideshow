@@ -1,13 +1,17 @@
 import { Action } from 'redux';
-import { CounterActions } from './actions';
+import { AppActions } from './actions';
 import { Frame } from './frame';
 
 export interface IAppState {
+  isFullscreen: boolean;
+  optionMenuIsOpen: boolean;
   frameIndex: number;
   frames: Frame[];
 }
 
 export const INITIAL_STATE: IAppState = {
+  isFullscreen: false,
+  optionMenuIsOpen: false,
   frameIndex: 0,
   frames: [{
       title: 'First frame',
@@ -61,23 +65,45 @@ export const INITIAL_STATE: IAppState = {
 
 export function rootReducer(lastState: IAppState, action: Action): IAppState {
   switch (action.type) {
-    case CounterActions.INCREMENT_FRAME_INDEX:
-        // console.log("increment frame", lastState.frameIndex)
-        // Do nothing if frameIndex exceeds the number of frames
-        if (lastState.frameIndex + 1 >= lastState.frames.length) {
-          return lastState;
-        }
-        return Object.assign({}, lastState, {
+    case AppActions.INCREMENT_FRAME_INDEX:
+      // Do nothing if frameIndex exceeds the number of frames
+      if (lastState.frameIndex + 1 >= lastState.frames.length) { return lastState; }
+      return Object.assign({}, lastState, {
         frameIndex: lastState.frameIndex + 1
       });
-    case CounterActions.DECREMENT_FRAME_INDEX:
-        // console.log("decrement frame", lastState.frameIndex)
-        // Do nothing if frameIndex is negative
-        if (lastState.frameIndex <= 0) {
-          return lastState;
-        }
-        return Object.assign({}, lastState, {
+    case AppActions.DECREMENT_FRAME_INDEX:
+      // Do nothing if frameIndex is negative
+      if (lastState.frameIndex <= 0) { return lastState; }
+      return Object.assign({}, lastState, {
         frameIndex: lastState.frameIndex - 1
+      });
+    case AppActions.TOGGLE_MENU:
+      return Object.assign({}, lastState, {
+          optionMenuIsOpen: !lastState.optionMenuIsOpen
+      });
+    case AppActions.TOGGLE_FULLSCREEN:
+      let el = document.getElementById('slideFrame');
+      if (lastState.isFullscreen) {
+        if(document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if(document['mozCancelFullScreen']) {
+          document['mozCancelFullScreen']();
+        } else if(document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      } else {
+        if(el.requestFullscreen) {
+          el.requestFullscreen();
+        } else if(el['mozRequestFullScreen']) {
+          el['mozRequestFullScreen']();
+        } else if(el.webkitRequestFullscreen) {
+          el.webkitRequestFullscreen();
+        } else if(el['msRequestFullscreen']) {
+          el['msRequestFullscreen']();
+        }
+      }
+      return Object.assign({}, lastState, {
+        isFullscreen: !lastState.isFullscreen
       });
   }
 

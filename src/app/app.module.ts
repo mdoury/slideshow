@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -11,10 +12,10 @@ import { MenuComponent } from './menu/menu.component';
 
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import { rootReducer, IAppState, INITIAL_STATE } from './store';
-import { CounterActions } from './actions';
+import { AppActions } from './actions';
 
 
-import { MdButtonModule, MdIconModule } from '@angular/material';
+import { MdButtonModule, MdIconModule, MdMenuModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -25,14 +26,16 @@ import { MdButtonModule, MdIconModule } from '@angular/material';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
     MdButtonModule,
     MdIconModule,
+    MdMenuModule,
     NgReduxModule
   ],
-  providers: [CounterActions],
+  providers: [AppActions],
   bootstrap: [AppComponent]
 })
 export class AppModule {
