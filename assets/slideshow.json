@@ -1,0 +1,125 @@
+[{
+  "title": "Slideshow",
+  "content": ["An Angular + Redux app for in-browser slideshows"],
+  "style": {
+    "color": "white",
+    "bgColor": "#1abc9c"
+  }
+}, {
+  "title": "App Basics",
+  "code": {
+    "source": [
+      "const App = {",
+      "\tAngular: view.handle(modules, components, services, data-binding),",
+      "\tRedux:\t states.handle(store, actions, reducer)",
+      "}"
+    ],
+    "language": "typescript"
+  },
+  "style": {
+    "color": "white",
+    "bgColor": "#2ecc71"
+  }
+}, {
+  "title": "Angular Basics",
+  "code": {
+    "source": [
+      "const Angular = {",
+      "\tTemplates:\tcompose(app.structure),",
+      "\tComponents:\tmanage(html.templates),",
+      "\tServices:\tadd(app.logic),",
+      "\tModules:\tgroup(components, services)",
+      "}"
+    ],
+    "language": "typescript"
+  },
+  "style": {
+    "color": "white",
+    "bgColor": "#2ecc71"
+  }
+}, {
+  "title": "FrameModule",
+  "code": {
+    "source": [
+    "const imports = [",
+    "\t// Import various modules, e.g. Angular, Redux, Material Design...",
+    "]",
+    "const declarations = [",
+    "\tFrameComponent,",
+    "\tNavigationMenuComponent,",
+    "\tOptionMenuComponent,",
+    "\tSliderComponent",
+    "]",
+    "const providers = [",
+    "\tFrameService,",
+    "\tNavigationMenuService",
+    "]",
+    "const exports = [FrameComponent]"
+    ],
+    "language": "typescript"
+  },
+  "style": {
+    "color": "white",
+    "bgColor": "#f39c12"
+  }
+}, {
+  "title": "FrameModule",
+  "code": {
+    "source": [
+      "export class FrameModule {",
+      "\tconstructor(ngRedux: NgRedux<IAppState>) {",
+      "\t\tngRedux.configureStore(",
+      "\t\t\trootReducer,",
+      "\t\t\tINITIAL_STATE);",
+      "\t}",
+      "}"
+    ],
+    "language": "typescript"
+  },
+  "style": {
+    "color": "white",
+    "bgColor": "#f39c12"
+  }
+}, {
+  "title": "NavigationMenuComponent",
+  "style": {
+    "color": "white",
+    "bgColor": "#c0392b"
+  },
+  "code": {
+    "source": ["<img src='example3.png'>"],
+    "language": "markup"
+  }
+}, {
+  "title": "Fifth frame",
+  "content": ["You are seeing the fifth.frame();"],
+  "style": {
+    "color": "white",
+    "bgColor": "#f1c40f"
+  },
+  "code": {
+    "source": [
+      "constructor(",
+      "  private http: Http,",
+      "  private ngRedux: NgRedux<IAppState>,",
+      "  private actions: AppActions) {",
+      "  this.activeFrameIndexSub = ngRedux",
+      "    .select<number>('activeFrameIndex')",
+      "    .subscribe(idx => this.activeFrameIndex = idx);",
+      "  this.frames$ = ngRedux",
+      "    .select<IFrame[]>('frames');",
+      "}"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "content": ["You are seeing the sixth.frame();"],
+  "style": {
+    "color": "white",
+    "bgColor": "#2c3e50"
+  },
+  "code": {
+    "source": "test-typescript.txt",
+    "language": "typescript"
+  }
+}]
