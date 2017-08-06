@@ -1,30 +1,43 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 :host {
-	position: relative;
-	font-family: Roboto;
-}
+	font-family: Roboto; 
+} 
 
-.wrapper {
+.frame {
 	display: flex; 
-	flex-direction: column; 
-	min-height: 100vh;
-	min-width: 90vw;
+	flex-direction: column;  
+	min-width: 90%;
+	min-height: 100vh;  
 	justify-content: center;
-	padding-left: 5vw;
-	padding-right: 5vw;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
 .menu {
-	position: fixed; 
-	bottom:30px;
-	right:30px;
+	width: 180px;
+	margin: auto;
 }
 
- h1 {
-	font-size: 6em; 
+frame-menu {
+	position: absolute;
+	bottom: 20px;
+}
+
+h1 {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	font-size: 7em; 
+	font-weight: normal;  
 }
 
 p { 
 	font-size: 2em;
+} 
+
+ pre {
+	margin: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 36px;
 } 

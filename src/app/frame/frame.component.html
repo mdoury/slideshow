@@ -1,32 +1,33 @@
-
-<div *ngFor="let frame of frames$ | async; index as i">
-
-  <div class="wrapper"
-    *ngIf="i === frameIndex"
+<!-- Iterate over frames  -->
+<div 
+  class="frame-container" 
+  *ngFor="let frame of frameService.frames; index as i">
+  <!-- Frame element: only shows when active -->
+  <div 
+    class="frame"
+    (click)="navigationMenuService.onBackgroundClick();"
+    *ngIf="i === frameService.activeFrameIndex"
     [style.color] = "frame.style.color"
     [style.background-color] = "frame.style.bgColor">
-
-  <!-- Title section  -->
-  <h1 *ngIf="frame.title">
-    {{frame.title}}
-  </h1>
-
-  <!-- Content section  -->
-  <p *ngIf="frame.content">
-    {{frame.content}}
-  </p>
-
-  <!-- Code section  -->
-  <pre *ngIf="frame.code">
-    <code 
-      id="code-container-{{ i }}" 
-      class="language-{{ frame.code.language }}">
-      {{ frame.code.source }}
-    </code>
-  </pre> 
+    <!-- Title section  -->
+    <h1 *ngIf="frame.title">
+      {{frame.title}}
+    </h1>
+    <!-- Content section  -->
+    <div *ngIf="frame.content">
+      <p *ngFor="let content of frame.content">
+        {{content}}
+      </p>
+    </div>
+    <!-- Code section  -->
+    <pre *ngIf="frame.code" class="language-{{frame.code.language}}">
+      <code class="language-{{frame.code.language}}">
+        {{frame.code.source}}
+      </code>
+    </pre> 
   </div>
-<!-- <slide-code *ngIf="frame.code" [code]="frame.code"></slide-code> -->
 </div>
-
-<ng-template #loading>Loading Frame...</ng-template> 
-<slide-menu class="menu"></slide-menu>
+<!-- Navigation menu  -->
+<div class="menu">
+  <frame-menu></frame-menu>
+</div>

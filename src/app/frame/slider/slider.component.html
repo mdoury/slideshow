@@ -1,0 +1,21 @@
+<!-- Slider container -->
+<div class='slider'>
+  <!-- Material design slider -->
+  <md-slider 
+    (input)="frameService.goToFrame($event.value-1);"
+    thumbLabel="true"
+    min="1" 
+    max="{{frameService.frames.length}}" 
+    step="1"
+    value="{{frameService.activeFrameIndex+1}}"
+    class="md-slider">
+  </md-slider>
+  <!-- Close menu button -->
+  <button 
+    md-button 
+    md-icon-button 
+    class="close-menu-button" 
+    (click)="navigationMenuService.toggleMenu();">
+    <md-icon class="md-icon">close</md-icon>
+  </button>
+</div>

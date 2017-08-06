@@ -1,0 +1,12 @@
+:host { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  min-height: 100vh; 
+  margin: 0;
+}
+
+#slideshow-frame {
+  min-height: 100vh; 
+  min-width: 100vw;
+}

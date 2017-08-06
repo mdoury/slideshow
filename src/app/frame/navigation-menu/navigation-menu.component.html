@@ -1,0 +1,28 @@
+<frame-option-menu></frame-option-menu>
+<!-- Menu container -->
+<div id='menu'>
+  <!-- Previous frame button -->
+  <button 
+    md-button 
+    md-icon-button 
+    class = 'menu-button'
+    (click) = 'frameService.prevFrame();'>
+    <md-icon>keyboard_arrow_left</md-icon>
+  </button>
+  <!-- Toggle menu button -->
+  <button 
+    md-button 
+    md-icon-button 
+    class = 'menu-button' 
+    (click)='navigationMenuService.toggleMenu();'>
+    <md-icon>more_horiz</md-icon> 
+  </button>
+  <!-- Next frame button -->
+  <button 
+    md-button 
+    md-icon-button 
+    class='menu-button'
+    (click)='frameService.nextFrame();'>
+    <md-icon>keyboard_arrow_right</md-icon>
+  </button>
+</div>

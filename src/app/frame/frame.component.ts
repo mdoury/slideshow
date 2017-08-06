@@ -1,38 +1,50 @@
-import { Component, AfterViewChecked, Input } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/share';
+import { Component, OnInit, AfterViewChecked, Input, HostListener } from '@angular/core';
 
-import { NgRedux } from '@angular-redux/store';
-import { AppActions } from '../actions';
-import { IAppState } from '../store';
+import { FrameService } from './frame.service';
+import { NavigationMenuService } from './navigation-menu/navigation-menu.service';
 
-import Prism from 'prismjs';
-
-import { Frame } from '../frame';
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37,
+  G = 71
+}
 
 @Component({
-  selector: 'slide-frame',
+  selector: 'slideshow-frame',
   templateUrl: './frame.component.html',
-  styleUrls: ['./frame.component.css']
+  styleUrls: ['./frame.component.css'],
+  providers: [ FrameService, NavigationMenuService ]
 })
-export class FrameComponent implements AfterViewChecked {
+export class FrameComponent implements OnInit, AfterViewChecked {
 
-  @Input() frameIdx: number;
-
-  frameIndex: number;
-  frameIndexSub;
-  frames$: Observable<Frame[]>;
-  optionMenuIsOpen$: Observable<boolean>;
+  @Input() filename: string;
 
   constructor(
-    private ngRedux: NgRedux<IAppState>,
-    private actions: AppActions) {
-    this.frameIndexSub = ngRedux.select<number>('frameIndex').subscribe(fI => this.frameIndex = fI);
-    this.frames$ = ngRedux.select<Frame[]>('frames');
+    private frameService: FrameService,
+    private navigationMenuService: NavigationMenuService
+  ){ }
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    switch (event.keyCode) {
+      case KEY_CODE.RIGHT_ARROW:
+        this.frameService.nextFrame();
+        break;
+      case KEY_CODE.LEFT_ARROW:
+        this.frameService.prevFrame();
+        break;
+      case KEY_CODE.G:
+        this.frameService.goToFrame();
+        break;
+      default:
+    }
+  }
+
+  ngOnInit() {
+    this.frameService.initFrames(this.filename);
   }
 
   ngAfterViewChecked() {
-    Prism.highlightAll();
+    this.frameService.highlightAll();
   }
-
 }

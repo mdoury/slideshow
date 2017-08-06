@@ -1,0 +1,13 @@
+<!-- Option menu container -->
+<div class='option-menu' *ngIf='navigationMenuService.isOptionMenuOpen'>
+  <!-- Frame slider component -->
+  <frame-slider class='option-menu-button'></frame-slider>
+  <!-- Fullscreen button -->
+  <button 
+    md-button 
+    class="option-menu-button"
+    (click)='navigationMenuService.toggleFullscreen();'>
+    <md-icon class="option-menu-icon">fullscreen</md-icon>
+    <span>Fullscreen</span>
+  </button>
+</div> 

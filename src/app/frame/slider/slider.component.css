@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+  height: 40px;
+}

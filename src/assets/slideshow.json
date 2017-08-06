@@ -1,0 +1,71 @@
+[{
+  "title": "Slideshow",
+  "content": ["An Angular + ngRx app for in-browser slideshows"],
+  "style": {
+    "color": "white",
+    "bgColor": "#1abc9c"
+  }
+}, {
+  "title": "Basics",
+  "content": [
+    "- Angular displays data (template + data binding)",
+    "- Redux handles the app states (store + actions)"
+  ],
+  "style": {
+    "color": "white",
+    "bgColor": "#2ecc71"
+  }
+}, {
+  "title": "Angular components",
+  "content": [
+    "Frame: display content",
+    "Menu: call to action",
+    "Slider: frame selector"
+  ],
+  "style": {
+    "color": "white",
+    "bgColor": "#f39c12"
+  }
+}, {
+  "title": "Frame Component",
+  "style": {
+    "color": "white",
+    "bgColor": "#c0392b"
+  },
+  "code": {
+    "source": ["<img src='example3.png'>"],
+    "language": "markup"
+  }
+}, {
+  "title": "Fifth frame",
+  "content": ["You are seeing the fifth.frame();"],
+  "style": {
+    "color": "white",
+    "bgColor": "#f1c40f"
+  },
+  "code": {
+    "source": [
+      "constructor(",
+      "  private http: Http,",
+      "  private ngRedux: NgRedux<IAppState>,",
+      "  private actions: AppActions) {",
+      "  this.activeFrameIndexSub = ngRedux",
+      "    .select<number>('activeFrameIndex')",
+      "    .subscribe(idx => this.activeFrameIndex = idx);",
+      "  this.frames$ = ngRedux",
+      "    .select<IFrame[]>('frames');",
+      "}"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "content": ["You are seeing the sixth.frame();"],
+  "style": {
+    "color": "white",
+    "bgColor": "#2c3e50"
+  },
+  "code": {
+    "source": "test-typescript.txt",
+    "language": "typescript"
+  }
+}]
