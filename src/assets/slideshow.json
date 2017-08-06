@@ -1,33 +1,102 @@
 [{
   "title": "Slideshow",
-  "content": ["An Angular + ngRx app for in-browser slideshows"],
+  "content": ["An Angular + Redux app for in-browser slideshows"],
   "style": {
     "color": "white",
     "bgColor": "#1abc9c"
   }
 }, {
-  "title": "Basics",
-  "content": [
-    "- Angular displays data (template + data binding)",
-    "- Redux handles the app states (store + actions)"
-  ],
+  "title": "App Basics",
+  "code": {
+    "source": [
+      "const App = {",
+      "\tAngular: view.handle(modules, components, services, data-binding),",
+      "\tRedux:\t states.handle(store, actions, reducer)",
+      "}"
+    ],
+    "language": "typescript"
+  },
   "style": {
     "color": "white",
     "bgColor": "#2ecc71"
   }
 }, {
-  "title": "Angular components",
-  "content": [
-    "Frame: display content",
-    "Menu: call to action",
-    "Slider: frame selector"
-  ],
+  "title": "Angular Basics",
+  "code": {
+    "source": [
+      "const Angular = {",
+      "\tTemplates:\tcompose(app.structure),",
+      "\tComponents:\tmanage(html.templates),",
+      "\tServices:\tadd(app.logic),",
+      "\tModules:\tgroup(components, services)",
+      "}"
+    ],
+    "language": "typescript"
+  },
+  "style": {
+    "color": "white",
+    "bgColor": "#2ecc71"
+  }
+}, {
+  "title": "FrameModule",
+  "code": {
+    "source": [
+    "const imports = [",
+    "\t// Import various modules, e.g. Angular, Redux, Material Design...",
+    "]",
+    "const declarations = [",
+    "\tFrameComponent,",
+    "\tNavigationMenuComponent,",
+    "\tOptionMenuComponent,",
+    "\tSliderComponent",
+    "]",
+    "const providers = [",
+    "\tFrameService,",
+    "\tNavigationMenuService",
+    "]",
+    "const exports = [FrameComponent]"
+    ],
+    "language": "typescript"
+  },
   "style": {
     "color": "white",
     "bgColor": "#f39c12"
   }
 }, {
-  "title": "Frame Component",
+  "title": "FrameModule",
+  "code": {
+    "source": [
+    "const providers = [",
+    "\tFrameService,",
+    "\tNavigationMenuService",
+    "]"
+    ],
+    "language": "typescript"
+  },
+  "style": {
+    "color": "white",
+    "bgColor": "#f39c12"
+  }
+}, {
+  "title": "FrameModule",
+  "code": {
+    "source": [
+      "export class FrameModule {",
+      "\tconstructor(ngRedux: NgRedux<IAppState>) {",
+      "\t\tngRedux.configureStore(",
+      "\t\t\trootReducer,",
+      "\t\t\tINITIAL_STATE);",
+      "\t}",
+      "}"
+    ],
+    "language": "typescript"
+  },
+  "style": {
+    "color": "white",
+    "bgColor": "#f39c12"
+  }
+}, {
+  "title": "NavigationMenuComponent",
   "style": {
     "color": "white",
     "bgColor": "#c0392b"

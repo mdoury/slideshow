@@ -2,12 +2,12 @@
 <div class='slider'>
   <!-- Material design slider -->
   <md-slider 
-    (input)="frameService.goToFrame($event.value-1);"
+    (input)="slideshowService.goToSlide($event.value-1);"
     thumbLabel="true"
     min="1" 
-    max="{{frameService.frames.length}}" 
+    max="{{slideshowService.slides.length}}" 
     step="1"
-    value="{{frameService.activeFrameIndex+1}}"
+    value="{{slideshowService.activeSlideIndex+1}}"
     class="md-slider">
   </md-slider>
   <!-- Close menu button -->

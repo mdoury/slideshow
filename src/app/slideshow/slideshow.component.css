@@ -4,7 +4,13 @@
 	font-family: Roboto; 
 } 
 
-.frame {
+#slideshow-shell {
+	position: relative;
+	min-height: 100%;
+	min-width: 100%;
+}
+
+.slide {
 	display: flex; 
 	flex-direction: column;  
 	min-width: 90%;
@@ -19,15 +25,15 @@
 	margin: auto;
 }
 
-frame-menu {
+.slideshow-menu {
 	position: absolute;
 	bottom: 20px;
 }
 
 h1 {
-	margin-top: 40px;
-	margin-bottom: 40px;
-	font-size: 7em; 
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 6em; 
 	font-weight: normal;  
 }
 
@@ -39,5 +45,5 @@ p {
 	margin: 0;
 	padding-top: 0;
 	padding-bottom: 0;
-	padding-left: 36px;
+	padding-left: 36px; 
 } 

@@ -1,12 +1,12 @@
-<frame-option-menu></frame-option-menu>
+<slideshow-option-menu></slideshow-option-menu>
 <!-- Menu container -->
 <div id='menu'>
-  <!-- Previous frame button -->
+  <!-- Previous slide button -->
   <button 
     md-button 
     md-icon-button 
     class = 'menu-button'
-    (click) = 'frameService.prevFrame();'>
+    (click) = 'slideshowService.prevSlide();'>
     <md-icon>keyboard_arrow_left</md-icon>
   </button>
   <!-- Toggle menu button -->
@@ -17,12 +17,12 @@
     (click)='navigationMenuService.toggleMenu();'>
     <md-icon>more_horiz</md-icon> 
   </button>
-  <!-- Next frame button -->
+  <!-- Next slide button -->
   <button 
     md-button 
     md-icon-button 
     class='menu-button'
-    (click)='frameService.nextFrame();'>
+    (click)='slideshowService.nextSlide();'>
     <md-icon>keyboard_arrow_right</md-icon>
   </button>
 </div>

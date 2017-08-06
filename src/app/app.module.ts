@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FrameModule } from './frame/frame.module';
+import { SlideshowModule } from './slideshow/slideshow.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { FrameModule } from './frame/frame.module';
   ],
   imports: [
     BrowserModule,
-    FrameModule
+    SlideshowModule
   ],
   providers: [],
   bootstrap: [AppComponent]

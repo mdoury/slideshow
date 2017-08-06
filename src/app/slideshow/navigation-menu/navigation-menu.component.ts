@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 
-import { FrameService } from '../frame.service';
+import { SlideshowService } from '../slideshow.service';
 import { NavigationMenuService } from './navigation-menu.service';
 
 @Component({
-  selector: 'frame-menu',
+  selector: 'slideshow-menu',
   templateUrl: './navigation-menu.component.html',
   styleUrls: ['./navigation-menu.component.css']
 })
 export class NavigationMenuComponent {
 
   constructor(
-    private frameService: FrameService,
+    private slideshowService: SlideshowService,
     private navigationMenuService: NavigationMenuService) {}
 
 }

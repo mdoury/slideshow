@@ -1,26 +1,25 @@
 import { Component, OnInit, AfterViewChecked, Input, HostListener } from '@angular/core';
 
-import { FrameService } from './frame.service';
+import { SlideshowService } from './slideshow.service';
 import { NavigationMenuService } from './navigation-menu/navigation-menu.service';
 
 export enum KEY_CODE {
   RIGHT_ARROW = 39,
-  LEFT_ARROW = 37,
-  G = 71
+  LEFT_ARROW = 37
 }
 
 @Component({
-  selector: 'slideshow-frame',
-  templateUrl: './frame.component.html',
-  styleUrls: ['./frame.component.css'],
-  providers: [ FrameService, NavigationMenuService ]
+  selector: 'slideshow',
+  templateUrl: './slideshow.component.html',
+  styleUrls: ['./slideshow.component.css'],
+  providers: [ SlideshowService, NavigationMenuService ]
 })
-export class FrameComponent implements OnInit, AfterViewChecked {
+export class SlideshowComponent implements OnInit, AfterViewChecked {
 
   @Input() filename: string;
 
   constructor(
-    private frameService: FrameService,
+    private slideshowService: SlideshowService,
     private navigationMenuService: NavigationMenuService
   ){ }
 
@@ -28,23 +27,20 @@ export class FrameComponent implements OnInit, AfterViewChecked {
   keyEvent(event: KeyboardEvent) {
     switch (event.keyCode) {
       case KEY_CODE.RIGHT_ARROW:
-        this.frameService.nextFrame();
+        this.slideshowService.nextSlide();
         break;
       case KEY_CODE.LEFT_ARROW:
-        this.frameService.prevFrame();
-        break;
-      case KEY_CODE.G:
-        this.frameService.goToFrame();
+        this.slideshowService.prevSlide();
         break;
       default:
     }
   }
 
   ngOnInit() {
-    this.frameService.initFrames(this.filename);
+    this.slideshowService.initSlides(this.filename);
   }
 
   ngAfterViewChecked() {
-    this.frameService.highlightAll();
+    this.slideshowService.highlightAll();
   }
 }

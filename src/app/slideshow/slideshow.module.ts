@@ -9,8 +9,8 @@ import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import { rootReducer, IAppState, INITIAL_STATE } from './store';
 import { AppActions } from './actions';
 
-import { FrameComponent } from './frame.component';
-import { FrameService } from './frame.service';
+import { SlideshowComponent } from './slideshow.component';
+import { SlideshowService } from './slideshow.service';
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';
 import { NavigationMenuService } from './navigation-menu/navigation-menu.service';
 import { OptionMenuComponent } from './option-menu/option-menu.component';
@@ -26,19 +26,19 @@ import { SliderComponent } from './slider/slider.component';
     NgReduxModule
   ],
   declarations: [
-    FrameComponent,
+    SlideshowComponent,
     NavigationMenuComponent,
     OptionMenuComponent,
     SliderComponent
   ],
   providers: [
     AppActions,
-    FrameService,
+    SlideshowService,
     NavigationMenuService
   ],
-  exports: [ FrameComponent ]
+  exports: [ SlideshowComponent ]
 })
-export class FrameModule {
+export class SlideshowModule {
   constructor(ngRedux: NgRedux<IAppState>) {
     ngRedux.configureStore(
       rootReducer,

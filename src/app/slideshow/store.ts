@@ -1,53 +1,53 @@
 import { AppActions } from './actions';
-import { IFrame, IAction } from './interfaces'
+import { ISlide, IAction } from './interfaces'
 
 export interface IAppState {
   isFullscreen: boolean;
-  activeFrameIndex: number;
-  frames: IFrame[];
+  activeSlideIndex: number;
+  slides: ISlide[];
   isOptionMenuOpen: boolean;
 }
 
 export const INITIAL_STATE: IAppState = {
   isFullscreen: false,
-  activeFrameIndex: 0,
-  frames: [],
+  activeSlideIndex: 0,
+  slides: [],
   isOptionMenuOpen: false
 };
 
 export function rootReducer(lastState: IAppState, action: IAction): IAppState {
   switch (action.type) {
-    case AppActions.LOAD_FRAMES:
+    case AppActions.LOAD_SLIDES:
       if (action.payload) {
         return Object.assign({}, lastState, {
-          frames: action.payload
+          slides: action.payload
         });
       } else {
         return lastState;
       }
-    case AppActions.NEXT_FRAME:
-      // Do nothing if activeFrameIndex exceeds the number of frames
-      if (lastState.activeFrameIndex + 1 >= lastState.frames.length) { return lastState; }
+    case AppActions.NEXT_SLIDE:
+      // Do nothing if activeSlideIndex exceeds the number of slides
+      if (lastState.activeSlideIndex + 1 >= lastState.slides.length) { return lastState; }
       return Object.assign({}, lastState, {
-        activeFrameIndex: lastState.activeFrameIndex + 1
+        activeSlideIndex: lastState.activeSlideIndex + 1
       });
-    case AppActions.PREV_FRAME:
-      // Do nothing if activeFrameIndex is negative
-      if (lastState.activeFrameIndex <= 0) { return lastState; }
+    case AppActions.PREV_SLIDE:
+      // Do nothing if activeSlideIndex is negative
+      if (lastState.activeSlideIndex <= 0) { return lastState; }
       return Object.assign({}, lastState, {
-        activeFrameIndex: lastState.activeFrameIndex - 1
+        activeSlideIndex: lastState.activeSlideIndex - 1
       });
-    case AppActions.GO_TO_FRAME:
-      // Do nothing if activeFrameIndex outside the accepted range
+    case AppActions.GO_TO_SLIDE:
+      // Do nothing if activeSlideIndex outside the accepted range
       if ("payload" in action) {
         return Object.assign({}, lastState, {
-          activeFrameIndex: action.payload
+          activeSlideIndex: action.payload
         });
       } else {
         return lastState;
       }
     case AppActions.TOGGLE_FULLSCREEN:
-      const el = document.getElementById('slideshowFrame');
+      const el = document.getElementById('slideshow-shell');
       if (lastState.isFullscreen) {
         if (document.exitFullscreen) {
           document.exitFullscreen();

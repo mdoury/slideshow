@@ -1,0 +1,33 @@
+<div id="slideshow-shell">
+  <!-- Iterate over slides  -->
+  <div *ngFor="let slide of slideshowService.slides; index as i">
+    <!-- Slide element: only shows when active -->
+    <div 
+      class="slide"
+      (click)="navigationMenuService.onBackgroundClick();"
+      *ngIf="i === slideshowService.activeSlideIndex"
+      [style.color] = "slide.style.color"
+      [style.background-color] = "slide.style.bgColor">
+      <!-- Title section  -->
+      <h1 *ngIf="slide.title">
+        {{slide.title}}
+      </h1>
+      <!-- Content section  -->
+      <div *ngIf="slide.content">
+        <p *ngFor="let content of slide.content">
+          {{content}}
+        </p>
+      </div>
+      <!-- Code section  -->
+      <pre *ngIf="slide.code" class="language-{{slide.code.language}}">
+        <code class="language-{{slide.code.language}}">
+          {{slide.code.source}}
+        </code>
+      </pre> 
+    </div>
+  </div>
+  <!-- Navigation menu  -->
+  <div class="menu">
+    <slideshow-menu class="slideshow-menu"></slideshow-menu>
+  </div>
+</div>

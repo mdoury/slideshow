@@ -1,4 +1,4 @@
-export interface IFrame {
+export interface ISlide {
     title?: string;
     content?: string[];
     style?: IStyle;

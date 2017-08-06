@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavigationMenuComponent } from './menu.component';
+import { NavigationMenuComponent } from './navigation-menu.component';
 
 describe('NavigationMenuComponent', () => {
   let component: NavigationMenuComponent;

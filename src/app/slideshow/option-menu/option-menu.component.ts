@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationMenuService } from '../navigation-menu/navigation-menu.service';
 
 @Component({
-  selector: 'frame-option-menu',
+  selector: 'slideshow-option-menu',
   templateUrl: './option-menu.component.html',
   styleUrls: ['./option-menu.component.css']
 })
