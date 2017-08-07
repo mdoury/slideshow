@@ -3,25 +3,29 @@
   "content": ["An Angular + Redux app for in-browser slideshows"],
   "style": {
     "color": "white",
-    "bgColor": "#1abc9c"
+    "bgColor": "#c0392b"
   }
 }, {
   "title": "App Basics",
+  "style": {
+    "color": "white",
+    "bgColor": "#e74c3c"
+  },
   "code": {
     "source": [
       "const App = {",
-      "\tAngular: view.handle(modules, components, services, data-binding),",
-      "\tRedux:\t states.handle(store, actions, reducer)",
+      "\tAngular: handle.views(modules, components, services, data-binding),",
+      "\tRedux:\t handle.states(store, actions, reducers)",
       "}"
     ],
     "language": "typescript"
-  },
-  "style": {
-    "color": "white",
-    "bgColor": "#2ecc71"
   }
 }, {
   "title": "Angular Basics",
+  "style": {
+    "color": "white",
+    "bgColor": "#e67e22"
+  },
   "code": {
     "source": [
       "const Angular = {",
@@ -32,56 +36,57 @@
       "}"
     ],
     "language": "typescript"
-  },
-  "style": {
-    "color": "white",
-    "bgColor": "#2ecc71"
   }
 }, {
-  "title": "FrameModule",
+  "title": "Redux Basics",
+  "style": {
+    "color": "white",
+    "bgColor": "#d35400"
+  },
+  "code": {
+    "source": [
+      "const Redux = {",
+      "\tStore:\t\tmanage(app.state),",
+      "\tActions:\tdispatch(event.signal),",
+      "\tReducers:\treact(to.actions)",
+      "}"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "SlideshowModule",
+  "style": {
+    "color": "white",
+    "bgColor": "#f39c12"
+  },
   "code": {
     "source": [
     "const imports = [",
     "\t// Import various modules, e.g. Angular, Redux, Material Design...",
     "]",
     "const declarations = [",
-    "\tFrameComponent,",
+    "\tSlideshowComponent,",
     "\tNavigationMenuComponent,",
     "\tOptionMenuComponent,",
     "\tSliderComponent",
     "]",
     "const providers = [",
-    "\tFrameService,",
+    "\tSlideshowService,",
     "\tNavigationMenuService",
     "]",
     "const exports = [FrameComponent]"
     ],
     "language": "typescript"
-  },
+  }
+}, {
+  "title": "SlideshowModule",
   "style": {
     "color": "white",
     "bgColor": "#f39c12"
-  }
-}, {
-  "title": "FrameModule",
-  "code": {
-    "source": [
-    "const providers = [",
-    "\tFrameService,",
-    "\tNavigationMenuService",
-    "]"
-    ],
-    "language": "typescript"
   },
-  "style": {
-    "color": "white",
-    "bgColor": "#f39c12"
-  }
-}, {
-  "title": "FrameModule",
   "code": {
     "source": [
-      "export class FrameModule {",
+      "export class SlideshowModule {",
       "\tconstructor(ngRedux: NgRedux<IAppState>) {",
       "\t\tngRedux.configureStore(",
       "\t\t\trootReducer,",
@@ -90,51 +95,318 @@
       "}"
     ],
     "language": "typescript"
-  },
-  "style": {
-    "color": "white",
-    "bgColor": "#f39c12"
   }
 }, {
-  "title": "NavigationMenuComponent",
-  "style": {
-    "color": "white",
-    "bgColor": "#c0392b"
-  },
-  "code": {
-    "source": ["<img src='example3.png'>"],
-    "language": "markup"
-  }
-}, {
-  "title": "Fifth frame",
-  "content": ["You are seeing the fifth.frame();"],
+  "title": "SlideshowComponent",
   "style": {
     "color": "white",
     "bgColor": "#f1c40f"
   },
   "code": {
     "source": [
-      "constructor(",
-      "  private http: Http,",
-      "  private ngRedux: NgRedux<IAppState>,",
-      "  private actions: AppActions) {",
-      "  this.activeFrameIndexSub = ngRedux",
-      "    .select<number>('activeFrameIndex')",
-      "    .subscribe(idx => this.activeFrameIndex = idx);",
-      "  this.frames$ = ngRedux",
-      "    .select<IFrame[]>('frames');",
+      "@Component({",
+      "  selector: 'slideshow',",
+      "})",
+      "export class SlideshowComponent implements OnInit, AfterViewChecked {",
+      "  @Input() filename: string;",
+      "  constructor(",
+      "    public slideshowService: SlideshowService,",
+      "    public navigationMenuService: NavigationMenuService",
+      "  ){ }",
+      "  ngOnInit() {",
+      "    this.slideshowService.initSlides(this.filename);",
+      "  }",
+      "  ngAfterViewChecked() {",
+      "    this.slideshowService.highlightAll();",
+      "  }",
       "}"
     ],
     "language": "typescript"
   }
 }, {
-  "content": ["You are seeing the sixth.frame();"],
+  "title": "SlideshowComponent",
   "style": {
     "color": "white",
-    "bgColor": "#2c3e50"
+    "bgColor": "#f1c40f"
   },
   "code": {
-    "source": "test-typescript.txt",
+    "source": [
+      "@HostListener('window:keyup', ['$event'])",
+      "keyEvent(event: KeyboardEvent) {",
+      "  switch (event.keyCode) {",
+      "    case KEY_CODE.RIGHT_ARROW:",
+      "      this.slideshowService.nextSlide();",
+      "      break;",
+      "    case KEY_CODE.LEFT_ARROW:",
+      "      this.slideshowService.prevSlide();",
+      "      break;",
+      "    default:",
+      "  }",
+      "}"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "SlideshowComponent",
+  "style": {
+    "color": "white",
+    "bgColor": "#f1c40f"
+  },
+  "code": {
+    "source": [
+      "<!-- Iterate over slides -->",
+      "<div *ngFor='let slide of slideshowService.slides; index as i'>",
+      "  <!-- Slide element: only shows when active -->",
+      "  <div *ngIf='i === slideshowService.activeSlideIndex'>",
+      "    <!-- Title section -->",
+      "    <h1>{{slide.title}}</h1>",
+      "    <!-- Content section  -->",
+      "    <p>{{slide.content}}</p>",
+      "    <!-- Code section -->",
+      "    <pre class='language-{{slide.code.language}}'>",
+      "      <code>{{slide.code.source}}</code>",
+      "    </pre> ",
+      "  </div>",
+      "</div>",
+      "<!-- Navigation menu -->",
+      "<slideshow-menu></slideshow-menu>"
+    ],
+    "language": "markup"
+  }
+}, {
+  "title": "SlideshowService",
+  "style": {
+    "color": "white",
+    "bgColor": "#1abc9c"
+  },
+  "code": {
+    "source": [
+      "activeSlideIndex: number;",
+      "slides: ISlide[];",
+      "",
+      "initSlides(filename: string) { ... }",
+      "nextSlide() { ... }",
+      "prevSlide() { ... }",
+      "goToSlide(idx: number) { ... }",
+      "highlightCode() { ... }"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "NavigationMenuComponent",
+  "style": {
+    "color": "white",
+    "bgColor": "#16a085"
+  },
+  "code": {
+    "source": [
+      "@Component({",
+      "  selector: 'slideshow-menu',",
+      "  templateUrl: './navigation-menu.component.html',",
+      "  styleUrls: ['./navigation-menu.component.css']",
+      "})",
+      "export class NavigationMenuComponent {",
+      "  constructor(",
+      "    public slideshowService: SlideshowService,",
+      "    public navigationMenuService: NavigationMenuService) {}",
+      "}"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "NavigationMenuComponent",
+  "style": {
+    "color": "white",
+    "bgColor": "#16a085"
+  },
+  "code": {
+    "source": [
+      "<slideshow-option-menu></slideshow-option-menu>",
+      "<!-- Menu container -->",
+      "<div id='menu'>",
+      "  <!-- Previous slide button -->",
+      "  <button (click)='slideshowService.prevSlide();'>",
+      "    <md-icon>keyboard_arrow_left</md-icon>",
+      "  </button>",
+      "  <!-- Toggle menu button -->",
+      "  <button (click)='navigationMenuService.toggleMenu();'>",
+      "    <md-icon>more_horiz</md-icon> ",
+      "  </button>",
+      "  <!-- Next slide button -->",
+      "  <button (click)='slideshowService.nextSlide();'>",
+      "    <md-icon>keyboard_arrow_right</md-icon>",
+      "  </button>",
+      "</div>"
+    ],
+    "language": "markup"
+  }
+}, {
+  "title": "NavigationMenuService",
+  "style": {
+    "color": "white",
+    "bgColor": "#27ae60"
+  },
+  "code": {
+    "source": [
+      "isOptionMenuOpen: boolean;",
+      "",
+      "toggleMenu() { ... }",
+      "toggleFullscreen() { ... }"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "OptionMenuComponent",
+  "style": {
+    "color": "white",
+    "bgColor": "#2ecc71"
+  },
+  "code": {
+    "source": [
+      "@Component({",
+      "  selector: 'slideshow-option-menu',",
+      "  templateUrl: './option-menu.component.html',",
+      "  styleUrls: ['./option-menu.component.css']",
+      "})",
+      "export class OptionMenuComponent {",
+      "  constructor(public navigationMenuService: NavigationMenuService) { }",
+      "}"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "OptionMenuComponent",
+  "style": {
+    "color": "white",
+    "bgColor": "#2ecc71"
+  },
+  "code": {
+    "source": [
+      "<!-- Option menu container -->",
+      "<div *ngIf='navigationMenuService.isOptionMenuOpen'>",
+      "  <!-- Slide slider component -->",
+      "  <slideshow-slider></slideshow-slider>",
+      "  <!-- Fullscreen button -->",
+      "  <button (click)='navigationMenuService.toggleFullscreen();'>",
+      "    <md-icon>fullscreen</md-icon>",
+      "    <span>Fullscreen</span>",
+      "  </button>",
+      "</div> "
+    ],
+    "language": "markup"
+  }
+}, {
+  "title": "SliderComponent",
+  "style": {
+    "color": "white",
+    "bgColor": "#3498db"
+  },
+  "code": {
+    "source": [
+      "@Component({",
+      "  selector: 'slideshow-slider',",
+      "  templateUrl: './slider.component.html',",
+      "  styleUrls: ['./slider.component.css']",
+      "})",
+      "export class SliderComponent {",
+      "  constructor(",
+      "    public slideshowService: SlideshowService,",
+      "    public navigationMenuService: NavigationMenuService) {}",
+      "}"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "SliderComponent",
+  "style": {
+    "color": "white",
+    "bgColor": "#3498db"
+  },
+  "code": {
+    "source": [
+      "<!-- Slider container -->",
+      "<div class='slider'>",
+      "  <!-- Material design slider -->",
+      "  <md-slider (input)='slideshowService.goToSlide($event.value-1);'></md-slider>",
+      "  <!-- Close menu button -->",
+      "  <button (click)='navigationMenuService.toggleMenu();'>",
+      "    <md-icon>close</md-icon>",
+      "  </button>",
+      "</div>"
+    ],
+    "language": "markup"
+  }
+}, {
+  "title": "Redux - AppActions",
+  "style": {
+    "color": "white",
+    "bgColor": "#9b59b6"
+  },
+  "code": {
+    "source": [
+      "@Injectable()",
+      "export class AppActions {",
+      "  static NEXT_SLIDE = 'NEXT_SLIDE';",
+      "  static PREV_SLIDE = 'PREV_SLIDE';",
+      "  static GO_TO_SLIDE = 'GO_TO_SLIDE';",
+      "             ...",
+      "  nextSlide(): IAction {",
+      "    return { type: AppActions.NEXT_SLIDE };",
+      "  }",
+      "  prevSlide(): IAction {",
+      "    return { type: AppActions.PREV_SLIDE };",
+      "  }",
+      "  goToSlide(slideIndex:number): IAction {",
+      "    return { type: AppActions.GO_TO_SLIDE, payload: slideIndex };",
+      "}",
+      "             ..."
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "Redux - Store",
+  "style": {
+    "color": "white",
+    "bgColor": "#8e44ad"
+  },
+  "code": {
+    "source": [
+      "export interface IAppState {",
+      "  isOptionMenuOpen: boolean;",
+      "  isFullscreen: boolean;",
+      "  activeSlideIndex: number;",
+      "  slides: ISlide[];",
+      "}",
+
+      "export const INITIAL_STATE: IAppState = {",
+      "  isFullscreen: false,",
+      "  isOptionMenuOpen: false",
+      "  activeSlideIndex: 0,",
+      "  slides: [],",
+      "}"
+    ],
+    "language": "typescript"
+  }
+}, {
+  "title": "Redux - Store",
+  "style": {
+    "color": "white",
+    "bgColor": "#8e44ad"
+  },
+  "code": {
+    "source": [
+      "export function rootReducer(lastState: IAppState, action: IAction): IAppState {",
+      "  switch (action.type) {",
+      "    case AppActions.LOAD_SLIDES:",
+      "      if (action.payload) {",
+      "        return Object.assign({}, lastState, {",
+      "          slides: action.payload",
+      "        });",
+      "      } else {",
+      "        return lastState;",
+      "      }",
+      "             ..."
+    ],
     "language": "typescript"
   }
 }]
