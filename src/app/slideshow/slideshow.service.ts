@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { NgRedux } from '@angular-redux/store';
@@ -12,13 +12,15 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-typescript';
 
 @Injectable()
-export class SlideshowService {
+export class SlideshowService implements OnDestroy {
 
   highlightAll: (this: void) => void;
   activeSlideIndex: number;
   activeSlideIndexSub: Subscription;
   slides: ISlide[];
   slidesSub: Subscription;
+  isCodeHighlighted: boolean;
+  isCodeHighlightedSub: Subscription;
 
   constructor(
     private http: Http,
@@ -30,6 +32,9 @@ export class SlideshowService {
     this.slidesSub = ngRedux
       .select<ISlide[]>('slides')
       .subscribe(f => this.slides = f);
+    this.isCodeHighlightedSub = ngRedux
+      .select<boolean>('isCodeHighlighted')
+      .subscribe(isHighlighted => this.isCodeHighlighted = isHighlighted);
       this.highlightAll = Prism.highlightAll;
     }
 
@@ -44,15 +49,18 @@ export class SlideshowService {
   }
 
   nextSlide() {
+    this.resetCode();
     this.ngRedux.dispatch(this.actions.nextSlide());
   }
 
   prevSlide() {
+    this.resetCode();
     this.ngRedux.dispatch(this.actions.prevSlide());
   }
 
-  goToSlide(idx?: number) {
-    this.ngRedux.dispatch(this.actions.goToSlide(idx)); 
+  goToSlide(idx: number) {
+    this.resetCode();
+    this.ngRedux.dispatch(this.actions.goToSlide(idx));
   }
   
   private handleCode(slide: ISlide) {
@@ -71,8 +79,22 @@ export class SlideshowService {
     }
   }
 
+  highlightedCode() {
+    this.ngRedux.dispatch(this.actions.highlightedCode());
+  }
+
+  resetCode() {
+    this.ngRedux.dispatch(this.actions.resetCode());
+  }
+
   private isString(x: any): x is string {
     return typeof x === "string";
+  }
+
+  ngOnDestroy () {
+    this.activeSlideIndexSub.unsubscribe();
+    this.slidesSub.unsubscribe();
+    this.isCodeHighlightedSub.unsubscribe();
   }
 
 }
