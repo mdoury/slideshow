@@ -3,11 +3,10 @@
   <!-- Material design slider -->
   <md-slider 
     (input)="slideshowService.goToSlide($event.value-1);"
-    thumbLabel="true"
+    thumbLabel
     min="1" 
     max="{{slideshowService.slides.length}}" 
     step="1"
-    value="{{slideshowService.activeSlideIndex+1}}"
     class="md-slider">
   </md-slider>
   <!-- Close menu button -->
