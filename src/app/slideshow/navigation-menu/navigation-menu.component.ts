@@ -9,9 +9,7 @@ import { NavigationMenuService } from './navigation-menu.service';
   styleUrls: ['./navigation-menu.component.css']
 })
 export class NavigationMenuComponent {
-
   constructor(
-    private slideshowService: SlideshowService,
-    private navigationMenuService: NavigationMenuService) {}
-
+    public slideshowService: SlideshowService,
+    public navigationMenuService: NavigationMenuService) {}
 }

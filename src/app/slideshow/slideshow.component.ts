@@ -19,8 +19,8 @@ export class SlideshowComponent implements OnInit, AfterViewChecked {
   @Input() filename: string;
 
   constructor(
-    private slideshowService: SlideshowService,
-    private navigationMenuService: NavigationMenuService
+    public slideshowService: SlideshowService,
+    public navigationMenuService: NavigationMenuService
   ){ }
 
   @HostListener('window:keyup', ['$event'])
@@ -41,6 +41,8 @@ export class SlideshowComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
+    if (this.slideshowService.isCodeHighlighted) { return; }
     this.slideshowService.highlightAll();
+    this.slideshowService.highlightedCode();
   }
 }
