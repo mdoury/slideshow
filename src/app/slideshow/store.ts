@@ -2,6 +2,7 @@ import { AppActions } from './actions';
 import { ISlide, IAction } from './interfaces'
 
 export interface IAppState {
+  isCodeHighlighted: boolean;
   isFullscreen: boolean;
   activeSlideIndex: number;
   slides: ISlide[];
@@ -9,6 +10,7 @@ export interface IAppState {
 }
 
 export const INITIAL_STATE: IAppState = {
+  isCodeHighlighted: false,
   isFullscreen: false,
   activeSlideIndex: 0,
   slides: [],
@@ -74,8 +76,14 @@ export function rootReducer(lastState: IAppState, action: IAction): IAppState {
       return Object.assign({}, lastState, {
         isOptionMenuOpen: !lastState.isOptionMenuOpen
       });
+    case AppActions.HIGHLIGHTED_CODE:
+      return Object.assign({}, lastState, {
+        isCodeHighlighted: true
+      });
+    case AppActions.RESET_CODE:
+      return Object.assign({}, lastState, {
+        isCodeHighlighted: false
+      });
   }
-
-  // We don't care about any other actions right now.
   return lastState;
 }

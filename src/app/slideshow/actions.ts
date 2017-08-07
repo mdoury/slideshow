@@ -9,6 +9,8 @@ export class AppActions {
   static TOGGLE_MENU = 'TOGGLE_MENU';
   static TOGGLE_FULLSCREEN = 'TOGGLE_FULLSCREEN';
   static LOAD_SLIDES = 'LOAD_SLIDES';
+  static HIGHLIGHTED_CODE = 'HIGHLIGHTED_CODE';
+  static RESET_CODE = 'RESET_CODE';
 
   loadSlides(data): IAction {
     return { type: AppActions.LOAD_SLIDES, payload: data };
@@ -25,7 +27,7 @@ export class AppActions {
   goToSlide(slideIndex:number): IAction {
     return { type: AppActions.GO_TO_SLIDE, payload: slideIndex };
   }
-
+  
   toggleMenu(): IAction {
     return { type: AppActions.TOGGLE_MENU};
   }
@@ -33,4 +35,12 @@ export class AppActions {
   toggleFullscreen(): IAction {
     return { type: AppActions.TOGGLE_FULLSCREEN};
   }
+
+  highlightedCode(): IAction {
+    return { type: AppActions.HIGHLIGHTED_CODE };
+  }
+
+  resetCode(): IAction {
+    return { type: AppActions.RESET_CODE };
+  }  
 }
