@@ -14,6 +14,6 @@ export class SliderComponent implements AfterViewInit {
     public navigationMenuService: NavigationMenuService) {}
 
   ngAfterViewInit() {
-    document.getElementById("slide-slider").focus();
+    document.getElementById('slide-slider').focus();
   }
 }

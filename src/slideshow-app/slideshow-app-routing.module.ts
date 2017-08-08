@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 
 const routes: Routes = [
-  { path: 'slide/:id', component: SlideshowComponent },
+  { path: 'slide/:id?', component: SlideshowComponent },
   { path: '', children: [] }
 ];
 
@@ -11,4 +11,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class SlideshowAppRoutingModule { }

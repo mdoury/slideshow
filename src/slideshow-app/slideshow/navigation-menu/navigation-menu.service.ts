@@ -14,7 +14,7 @@ export class NavigationMenuService implements OnDestroy {
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private actions: AppActions
-  ) { 
+  ) {
     this.isOptionMenuOpenSub = ngRedux
       .select<boolean>('isOptionMenuOpen')
       .subscribe(isOpen => this.isOptionMenuOpen = isOpen);

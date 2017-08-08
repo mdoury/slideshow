@@ -41,7 +41,7 @@ export function rootReducer(lastState: IAppState, action: IAction): IAppState {
       });
     case AppActions.GO_TO_SLIDE:
       // Do nothing if activeSlideIndex outside the accepted range
-      if ("payload" in action) {
+      if ('payload' in action) {
         return Object.assign({}, lastState, {
           activeSlideIndex: action.payload
         });

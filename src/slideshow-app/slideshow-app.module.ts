@@ -1,18 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { SlideshowAppComponent } from './slideshow-app.component';
 import { SlideshowModule } from './slideshow/slideshow.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    SlideshowAppComponent
   ],
   imports: [
     BrowserModule,
     SlideshowModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [SlideshowAppComponent]
 })
-export class AppModule {}
+export class SlideshowAppModule {}

@@ -24,10 +24,10 @@ export class AppActions {
     return { type: AppActions.PREV_SLIDE };
   }
 
-  goToSlide(slideIndex:number): IAction {
+  goToSlide(slideIndex: number): IAction {
     return { type: AppActions.GO_TO_SLIDE, payload: slideIndex };
   }
-  
+
   toggleMenu(): IAction {
     return { type: AppActions.TOGGLE_MENU};
   }
@@ -42,5 +42,5 @@ export class AppActions {
 
   resetCode(): IAction {
     return { type: AppActions.RESET_CODE };
-  }  
+  }
 }

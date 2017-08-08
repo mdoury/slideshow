@@ -39,8 +39,8 @@ export class SlideshowService implements OnDestroy {
     }
 
   initSlides(filename: string) {
-    this.http.get(filename) 
-      .map(res => res.json()) 
+    this.http.get(filename)
+      .map(res => res.json())
       .map(data => {
         data.map(slide => this.handleCode(slide));
         this.ngRedux.dispatch(this.actions.loadSlides(data));
@@ -62,15 +62,14 @@ export class SlideshowService implements OnDestroy {
     this.resetCode();
     this.ngRedux.dispatch(this.actions.goToSlide(idx));
   }
-  
+
   private handleCode(slide: ISlide) {
     if (slide.code) {
       // Array of strings: each string is a code line
       if (Array.isArray(slide.code.source)) {
-        slide.code.source = '\n'+slide.code.source.join('\n');
-      } 
+        slide.code.source = '\n' + slide.code.source.join('\n');
+      } else if (this.isString(slide.code.source)) {
       // String: path to source file
-      else if (this.isString(slide.code.source)) {
         this.http.get('./assets/' + slide.code.source)
           .map(res => res.text())
           .map(txt => slide.code.source = '\n' + txt)
@@ -88,7 +87,7 @@ export class SlideshowService implements OnDestroy {
   }
 
   private isString(x: any): x is string {
-    return typeof x === "string";
+    return typeof x === 'string';
   }
 
   ngOnDestroy () {

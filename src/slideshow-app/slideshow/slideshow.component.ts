@@ -21,7 +21,7 @@ export class SlideshowComponent implements OnInit, AfterViewChecked {
   constructor(
     public slideshowService: SlideshowService,
     public navigationMenuService: NavigationMenuService
-  ){ }
+  ) {}
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
