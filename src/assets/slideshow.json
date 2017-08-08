@@ -409,4 +409,18 @@
     ],
     "language": "typescript"
   }
+}, {
+  "title": "Remerciements",
+  "style": {
+    "color": "white",
+    "bgColor": "#9b59b6"
+  },
+  "content": [
+    "Bonjour !",
+    "Au revoir !"
+  ],
+  "code": {
+    "source": "test-typescript.txt",
+    "language": "typescript"
+  }
 }]

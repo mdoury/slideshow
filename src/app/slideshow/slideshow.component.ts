@@ -25,6 +25,7 @@ export class SlideshowComponent implements OnInit, AfterViewChecked {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
+    event.stopPropagation();
     switch (event.keyCode) {
       case KEY_CODE.RIGHT_ARROW:
         this.slideshowService.nextSlide();

@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 :host {
 	font-family: Roboto; 
+	font-weight: regular;  
 } 
 
 #slideshow-shell {

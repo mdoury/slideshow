@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HttpModule } from '@angular/http';
-import { MdButtonModule, MdIconModule, MdSliderModule } from '@angular/material';
+import { MdButtonModule, MdSliderModule } from '@angular/material';
 import 'hammerjs';
 
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
@@ -21,7 +21,6 @@ import { SliderComponent } from './slider/slider.component';
     CommonModule,
     HttpModule,
     MdButtonModule,
-    MdIconModule,
     MdSliderModule,
     NgReduxModule
   ],
