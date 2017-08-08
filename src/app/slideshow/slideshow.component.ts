@@ -23,9 +23,9 @@ export class SlideshowComponent implements OnInit, AfterViewChecked {
     public navigationMenuService: NavigationMenuService
   ){ }
 
-  @HostListener('window:keyup', ['$event'])
+  @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    event.stopPropagation();
+    if (this.navigationMenuService.isOptionMenuOpen) { return }
     switch (event.keyCode) {
       case KEY_CODE.RIGHT_ARROW:
         this.slideshowService.nextSlide();
